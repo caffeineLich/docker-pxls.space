@@ -3,7 +3,7 @@
   port: 3000,
 
   // The host to proxy back end requests to (no protocol, no trailing slash)
-  proxyTo: 'pxls-backend:4567',
+  proxyTo: 'docker-pxlsspace.railway.internal:4567',
 
   // Displayed on each page
   title: 'pxls.space',
