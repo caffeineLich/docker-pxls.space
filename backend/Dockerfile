@@ -1,5 +1,5 @@
 # Force Build 8
-FROM maven:3.8.3-openjdk-16 AS build
+FROM maven:3.9-eclipse-temurin-17 AS build
 
 RUN java -version
 WORKDIR /Pxls
@@ -9,7 +9,7 @@ RUN mvn clean package; \
     cp target/pxls*.jar /tmp/pxls/pxls.jar; \
     cp -r resources/* /tmp/pxls
 
-FROM adoptopenjdk/openjdk16:jdk-16.0.1_9-alpine
+FROM eclipse-temurin:17-jdk-alpine
 RUN apk add\ 
 	curl
 LABEL maintainer="Aneurin Price adp@nyeprice.space"

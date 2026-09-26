@@ -29,6 +29,7 @@ services:
       POSTGRES_USER: "pxls"
       POSTGRES_PASSWORD: "ChAnGeMeAtYoUrEaRlIeStCoNvEnIeNcE"
       POSTGRES_DB: "pxls"
+    command: ["postgres", "-c", "max_connections=300"]
     volumes:
       - pxls-database:/var/lib/postgresql
 
