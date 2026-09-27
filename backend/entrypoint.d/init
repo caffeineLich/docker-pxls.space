@@ -22,6 +22,11 @@ else
     echo "Config Found"
 fi
 
+# Свои настройки: убираем старый блок OVERRIDES (он всегда в конце файла) и дописываем актуальный.
+# В HOCON более поздние значения перекрывают ранние, поэтому блок в конце побеждает.
+sed -i '/^# >>> OVERRIDES/,$d' /data/pxls.conf
+cat /tmp/overrides.conf >> /data/pxls.conf
+
 cp /tmp/pxls.jar /data/pxls.jar
 
 cd /data

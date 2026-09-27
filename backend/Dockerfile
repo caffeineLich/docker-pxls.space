@@ -1,9 +1,12 @@
-# Force Build 8
+# Force Build 9
 FROM maven:3.9-eclipse-temurin-17 AS build
 
 RUN java -version
 WORKDIR /Pxls
 RUN git clone https://github.com/pxlsspace/Pxls.git .;
+# Линейное накопление пикселей: каждый следующий копится за одинаковое время (без прогрессии)
+RUN sed -i 's/(2 + getStacked() + addToN(getStacked()))/(2 + getStacked())/' src/main/java/space/pxls/user/User.java \
+ && grep -q '(curCD \* multiplier) \* (2 + getStacked());' src/main/java/space/pxls/user/User.java
 RUN mvn clean package; \
     mkdir /tmp/pxls; \
     cp target/pxls*.jar /tmp/pxls/pxls.jar; \
@@ -15,5 +18,6 @@ RUN apk add\
 LABEL maintainer="Aneurin Price adp@nyeprice.space"
 COPY --from=build /tmp/pxls /tmp/
 COPY entrypoint.d/ /entrypoint.d
+COPY overrides.conf /tmp/overrides.conf
 HEALTHCHECK CMD curl --fail http://localhost:4567/ || exit 1
 ENTRYPOINT [ "/bin/run-parts", "--exit-on-error", "/entrypoint.d" ]
