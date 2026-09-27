@@ -6,5 +6,5 @@
   proxyTo: 'docker-pxlsspace.railway.internal:4567',
 
   // Displayed on each page
-  title: 'pxls.space',
+  title: 'Caffeine Lich's pxls.space',
 }
